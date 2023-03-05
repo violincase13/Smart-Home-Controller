@@ -5,10 +5,10 @@ strip: neopixel.Strip = None
 while True:
     if input.logo_is_pressed():
         if smarthome.PIR(DigitalPin.P0):
-            basic.show_string("s-a detectat prezenta")
+            basic.show_string("presence has been detected")
             basic.clear_screen()
         else:
-            basic.show_string("nu s-a detectat prezenta")
+            basic.show_string("no presence has been detected")
             basic.clear_screen()
     elif input.is_gesture(Gesture.SHAKE):
         basic.show_number(smarthome.read_soil_humidity(AnalogPin.P0))
@@ -26,16 +26,16 @@ while True:
     elif input.button_is_pressed(Button.A):
         basic.show_number(input.temperature())
         basic.clear_screen()
-        serial.write_value("temperatura", input.temperature())
+        serial.write_value("temperature", input.temperature())
     elif input.button_is_pressed(Button.B):
         basic.show_number(input.light_level())
         basic.clear_screen()
-        serial.write_value("luminozitate", input.light_level())
+        serial.write_value("brightness", input.light_level())
         if input.light_level() < 35:
-            basic.show_string("prea intunecat")
+            basic.show_string("too dark")
             basic.clear_screen()
         elif input.light_level() < 135:
-            basic.show_string("prea luminos")
+            basic.show_string("too light")
             basic.clear_screen()
 
 def on_forever():
